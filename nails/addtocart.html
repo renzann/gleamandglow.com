@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add to Cart</title>
+    <link rel="icon" href="logo.png" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fdf0ec;
+            padding: 20px;
+            margin: 0;
+            background-image: url("design/design8.jpg");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        h1 {
+            color: #ff5d8f;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="email"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        .form-group.inline {
+            display: flex;
+            justify-content: space-between;
+        }
+        .form-group.inline .form-control {
+            width: 48%;
+        }
+        .form-group textarea {
+            resize: vertical;
+            height: 80px;
+        }
+        .summary {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+        .summary h3 {
+            margin-top: 0;
+        }
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .btn-submit {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #ff5d8f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .btn-submit:hover {
+            background-color: #ff769f;
+        }
+        .back-button {
+            margin-top: 40px;
+        }
+        .back-button a {
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #FF4081;
+            color: white;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .back-button a:hover {
+            background-color: #ff739a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Order Checkout</h1>
+        <form id="orderForm" action="https://formspree.io/f/mkgwlwnz" method="POST">
+            
+            <!-- Product Details -->
+            <div class="form-group">
+                <label for="product">Product Name</label>
+                <input type="text" id="product" name="product" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="price">Product Price</label>
+                <input type="text" id="price" name="price" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="productImage">Product Image</label>
+                <img id="productImage" src="" alt="Product Image" style="max-width: 100px;">
+            </div>
+
+            <!-- Shipping Address -->
+            <div class="form-group">
+                <label for="address">Shipping Address</label>
+                <textarea id="address" name="address" placeholder="Enter your shipping address" required></textarea>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="_replyto" placeholder="Enter your email" required>
+            </div>
+
+            <!-- Shipping Method -->
+            <div class="form-group">
+                <label for="shipping">Shipping Method</label>
+                <select id="shipping" name="shipping" required>
+                    <option value="standard">Standard Shipping - Php 40.00</option>
+                    <option value="express">Express Shipping - Php 80.00</option>
+                </select>
+            </div>
+
+            <!-- Payment Options -->
+            <div class="form-group">
+                <label for="payment">Mode of Payment</label>
+                <select id="payment" name="payment" required>
+                    <option value="cash_on_delivery">Cash on Delivery</option>
+                    <option value="gcash">Gcash</option>
+                    <option value="paymaya">Paymaya</option>
+                    <option value="paypal">Paypal</option>
+                </select>
+            </div>
+
+            <!-- Summary -->
+            <div class="summary">
+                <h3>Order Summary</h3>
+                <div class="summary-item">
+                    <span>Product Price:</span>
+                    <span id="summaryPrice">Php 0.00</span>
+                </div>
+                <div class="summary-item">
+                    <span>Shipping:</span>
+                    <span id="summaryShipping">Php 40.00</span>
+                </div>
+                <div class="summary-item">
+                    <span><strong>Total:</strong></span>
+                    <span id="summaryTotal"><strong>Php 0.00</strong></span>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn-submit">Place Order</button>
+        </form>
+        <div class="back-button">
+            <a href="services.html">Back to Services</a>
+        </div>
+    </div>
+
+    <script>
+        // Get product info from localStorage
+        const selectedProduct = JSON.parse(localStorage.getItem('selectedProduct'));
+
+        if (selectedProduct) {
+            document.getElementById('product').value = selectedProduct.name;
+            document.getElementById('price').value = `Php ${selectedProduct.price}`;
+            document.getElementById('productImage').src = selectedProduct.image;
+            document.getElementById('summaryPrice').textContent = `Php ${selectedProduct.price}`;
+
+            // Initial total price calculation
+            const initialShipping = 40; // Standard shipping by default
+            const totalPrice = parseFloat(selectedProduct.price) + initialShipping;
+            document.getElementById('summaryTotal').textContent = `Php ${totalPrice.toFixed(2)}`;
+        }
+
+        // Update total when shipping changes
+        const shippingSelect = document.getElementById('shipping');
+        const summaryShipping = document.getElementById('summaryShipping');
+        const summaryTotal = document.getElementById('summaryTotal');
+        const summaryPrice = document.getElementById('summaryPrice');
+        
+        shippingSelect.addEventListener('change', function () {
+            const shippingCost = this.value === 'express' ? 80 : 40;
+            const productPrice = parseFloat(summaryPrice.textContent.replace('Php ', ''));
+            const totalPrice = productPrice + shippingCost;
+
+            summaryShipping.textContent = `Php ${shippingCost.toFixed(2)}`;
+            summaryTotal.textContent = `Php ${totalPrice.toFixed(2)}`;
+        });
+    </script>
+</body>
+</html>

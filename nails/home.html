@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nail Designs</title>
+    <link rel="icon" href="logo.png" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #FCE5DC;
+            text-align: center;
+        }
+        .container {
+            margin: 0 auto;
+            max-width: 1200px;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            color: #FF66A3;
+            font-size: 36px;
+            margin-left: 20px;
+        }
+        .logo {
+            max-width: 100px;
+        }
+        .logo img {
+            width: 100%;
+            height: auto;
+        }
+
+        h1 {
+            color: #FF66A3;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        /* design card styling */
+        .design-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        .design-card {
+            background-color: #FFF;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 2px solid #FF66A3;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.5s ease;
+        }
+        .design-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .design-card.enlarge img {
+            transform: scale(2); 
+            transition: transform 0.5s ease;
+        }
+        .description {
+            color: #999;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+
+        /* Back button styling */
+        .back-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 20px;
+            font-size: 18px;
+            color: #FFF;
+            background-color: #FF66A3;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+        }
+        .back-button:hover {
+            background-color: #FF3383;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+         <!-- Header with logo and title -->
+        <div class="header">
+            <div class="logo">
+                <img src="logo.png" alt="Company Logo">
+            </div>
+            <h1>Our Best Designs!</h1>
+        </div>
+
+        <div class="design-grid">
+            <div class="design-card" onclick="animateCard(this)">
+                <img src="nails/nail1.JPG" alt="Nail Design 1">
+                <p class="description">A set of long, pointed nails with a soft pink base and delicate floral designs in white and silver.</p>
+            </div>
+            <div class="design-card" onclick="animateCard(this)">
+                <img src="design/design1.jpg" alt="Nail Design 2">
+                <p class="description">It features almond-shaped nails with a gradient transition from light pink to a darker shade, adorned with cherry blossom flower designs.</p>
+            </div>
+            <div class="design-card" onclick="animateCard(this)">
+                <img src="nails/nail2.jpg" alt="Nail Design 3">
+                <p class="description">This oval-shaped nails with a transparent base and a subtle pink hue, embellished with delicate floral patterns and a touch of glitter.</p>
+            </div>
+            <div class="design-card" onclick="animateCard(this)">
+                <img src="design/design2.jpg" alt="Nail Design 4">
+                <p class="description">Presents a set of long, pointed nails with a deep green base and intricate flower designs in various shades of green, creating a natural and earthy look.</p>
+            </div>
+        </div>
+
+        <!-- Back button -->
+        <a href="index.html" class="back-button">Back to Homepage</a>
+    </div>
+
+    <script>
+        function animateCard(card) {
+            // Toggle the 'enlarge' class to animate the image size
+            card.classList.toggle('enlarge');
+        }
+    </script>
+
+</body>
+</html>

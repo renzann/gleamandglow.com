@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Booking</title>
+    <link rel="icon" href="logo.png" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #FCE5DC;
+            background-image: url("design/design5.jpg");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+            
+        }
+        .container {
+            width: 50%;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        h2 {
+            text-align: center;
+            color: #f06292;
+            font-size: 50px;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, select, textarea {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .small-input {
+            width: 20%; 
+        }
+        .button {
+            background-color: #f06292;
+            color: white;
+            padding: 10px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 50%;
+            font-size: 18px;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+        }
+        .button:hover {
+            background-color: #e91e63;
+            transform: scale(1.1);
+        }
+
+        /* Back button styling */
+        .back-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 20px;
+            font-size: 18px;
+            color: #FFF;
+            background-color: #FF66A3;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+        }
+        .back-button:hover {
+            background-color: #FF3383;
+            transform: scale(1.1);
+        }
+
+        .logo {
+            max-width: 100px;
+        }
+        .logo img {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="logo.png" alt="Company Logo">
+        </div>
+        <h2>Service Booking Form</h2>
+        
+        <form action="https://formspree.io/f/mkgwlwnz" method="POST">
+            <label for="service">Choose a Service:</label>
+            <select name="service" id="service" required class="small-input">
+                <option value="Manicure">Manicure</option>
+                <option value="Cleaning">Cleaning</option>
+                <option value="French Manicure">French Manicure</option>
+                <option value="Gel Manicure">Gel Manicure</option>
+                <option value="Spa Manicure">Spa Manicure</option>
+            </select>
+
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="contact">Contact No.:</label>
+            <input type="text" id="contact" name="contact" required>
+
+            <label for="address">Address:</label>
+            <textarea id="address" name="address" required></textarea>
+
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" min="0" max="120" required class="small-input">
+
+            <label for="sex">Sex:</label>
+            <select name="sex" id="sex" required class="small-input">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+            
+            <label for="date_time">Date and Time:</label>
+            <input type="datetime-local" id="date_time" name="date_time" required>
+
+            <label for="payment_method">Payment Method:</label>
+            <select name="payment_method" id="payment_method" required>
+                <option value="COD">Cash on Delivery</option>
+                <option value="E-Wallet">E-Wallet</option>
+            </select>
+
+          
+            <input type="text" name="_honey" style="display:none">
+            
+            <input type="hidden" name="_subject" value="New Booking Request">
+            
+            <input type="hidden" name="_redirect" value="http://127.0.0.1:5500/index.html">
+            
+            <button type="submit" class="button">Book Now</button>
+        </form>
+        <a href="services.html" class="back-button">Back to Services</a>
+        <a href="index.html" class="back-button">Back to Homepage</a>
+    </div>
+</body>
+</html>
